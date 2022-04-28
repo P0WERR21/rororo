@@ -3,7 +3,7 @@ local serviceCGui = game:GetService'CoreGui'
 local serviceTPS = game:GetService'TeleportService'
 local serviceCPI = game:GetService'ContentProvider'
 --
-repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.LoadedIn.Value
+repeat task.wait() until game:IsLoaded() and servicePlr.LocalPlayer.Character and servicePlr.LocalPlayer.LoadedIn.Value
 --
 
 local plrLocal = servicePlr.LocalPlayer
