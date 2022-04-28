@@ -2,6 +2,7 @@ local servicePlr = game:GetService'Players'
 local serviceCGui = game:GetService'CoreGui'
 local serviceTPS = game:GetService'TeleportService'
 local serviceCPI = game:GetService'ContentProvider'
+local serviceTwN = game:GetService'TweenService'
 --
 repeat task.wait() until game:IsLoaded() and servicePlr.LocalPlayer.Character and servicePlr.LocalPlayer.LoadedIn.Value
 --
@@ -30,7 +31,7 @@ repeat task.wait() until not plrLocal.PlayerGui.MenuGUI.Enabled and plrLocal.Cha
 repeat
     for i, v in next, workspace.Items:GetChildren() do
         local newCFrame = v.Handle.CFrame + Vector3.new(0, -17.3849, 0)
-        local TweenInfo = game.TweenService:Create(plrLocal.Character.HumanoidRootPart, TweenInfo.new(coolNumber, Enum.EasingStyle.Linear), {CFrame = newCFrame}, Enum.EasingDirection.Out, 0, false, 0):Play()
+        local TweenInfo = serviceTwN:Create(plrLocal.Character.HumanoidRootPart, TweenInfo.new(coolNumber, Enum.EasingStyle.Linear), {CFrame = newCFrame}, Enum.EasingDirection.Out, 0, false, 0):Play()
             task.wait(coolNumber)
         firetouchinterest(plrLocal.Character.HumanoidRootPart, v.Handle, 0)
     end
