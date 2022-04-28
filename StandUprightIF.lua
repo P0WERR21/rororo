@@ -31,7 +31,7 @@ repeat task.wait() until not plrLocal.PlayerGui.MenuGUI.Enabled and plrLocal.Cha
 repeat
     for i, v in next, workspace.Items:GetChildren() do
         local newCFrame = v.Handle.CFrame + Vector3.new(0, -17.3849, 0)
-        local TweenInfo = serviceTwN:Create(plrLocal.Character.HumanoidRootPart, TweenInfo.new(coolNumber, Enum.EasingStyle.Linear), {CFrame = newCFrame}, Enum.EasingDirection.Out, 0, false, 0):Play()
+        local Tween = serviceTwN:Create(plrLocal.Character.HumanoidRootPart, TweenInfo.new(coolNumber, Enum.EasingStyle.Linear), {CFrame = newCFrame}, Enum.EasingDirection.Out, 0, false, 0):Play()
             task.wait(coolNumber)
         firetouchinterest(plrLocal.Character.HumanoidRootPart, v.Handle, 0)
     end
