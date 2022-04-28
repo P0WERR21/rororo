@@ -36,6 +36,6 @@ repeat
     end
 task.wait()
 until #workspace.Items:GetChildren() == 0
-loadstring(game:HttpGet'https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/ActualServerHop.lua', true)()
+loadstring(game:HttpGet'https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/ActualServerHop.lua')()
 Teleport()
 
