@@ -1,6 +1,18 @@
 local pService = game:GetService'Players'.LocalPlayer
 local charPlayer = pService.Character
-repeat task.wait() until (pService.PlayerGui:WaitForChild('Skip', true))
+
+local function recursiveWait(x, y)
+   local recursive = x:FindFirstChild(y, true)
+	if not recursive then
+	    repeat
+		recursive = x.DescendantAdded:Wait()
+	    until recursive.Name == y
+	end
+   return recursive
+end
+
+recursiveWait(pService.PlayerGui, 'Skip')
+-- repeat task.wait() until (pService.PlayerGui:WaitForChild('Skip', true))
 
 local function hitSkip()
     pcall(function()		
@@ -11,7 +23,8 @@ end
 
 hitSkip()
 
-repeat task.wait() until pService.PlayerGui:WaitForChild('Play', true)
+recursiveWait(pService.PlayerGui, 'Play')
+--repeat task.wait() until pService.PlayerGui:WaitForChild('Play', true)
 
 local function hitPlay()
     pcall(function()
