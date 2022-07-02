@@ -30,3 +30,5 @@ local __namecall __namecall = hookmetamethod(game, "__namecall", function(self, 
 	end
     return __namecall(self, ...)
 end)
+
+print(true)
