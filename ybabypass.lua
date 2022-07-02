@@ -1,6 +1,6 @@
 local pService = game:GetService'Players'.LocalPlayer
 local charPlayer = pService.Character
-repeat task.wait() until (pService.PlayerGui:FindFirstChild'LoadingScreen' or pService.PlayerGui:FindFirstChild'LoadingScreen1') and charPlayer
+repeat task.wait() until (pService.PlayerGui:FindFirstChild'LoadingScreen'.Frame.LoadingFrame.BarFrame.Skip.TextButton)
 
 local function hitSkip()
     pcall(function()		
@@ -9,17 +9,18 @@ local function hitSkip()
     end)
 end
 
+hitSkip()
+
+repeat task.wait() until pService.PlayerGui:FindFirstChild'LoadingScreen'.Play
+
 local function hitPlay()
     pcall(function()
-	local loadingScreen = pService.PlayerGui.LoadingScreen
-        firesignal(loadingScreen.Play.MouseButton1Click)
+	local loadingScreen = pService.PlayerGui.LoadingScreen.Play
+        firesignal(loadingScreen.MouseButton1Click)
     end)
 end
 
-pcall(function()
-    hitSkip()
-    hitPlay()
-end)
+hitPlay()
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/ActualServerHop.lua', true))()
 task.wait()
@@ -31,4 +32,4 @@ local __namecall __namecall = hookmetamethod(game, "__namecall", function(self, 
     return __namecall(self, ...)
 end)
 
-print(true)
+repeat task.wait() until game:IsLoaded() and charPlayer
