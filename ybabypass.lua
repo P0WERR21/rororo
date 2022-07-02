@@ -1,5 +1,5 @@
 local pService = game:GetService'Players'.LocalPlayer.Character
-repeat task.wait() until game:IsLoaded() and pService and game.ContentProvider.RequestQueueSize == 0
+repeat task.wait() until game:IsLoaded() and pService
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/ActualServerHop.lua', true))()
 task.wait()
