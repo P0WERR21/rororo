@@ -1,6 +1,6 @@
 local pService = game:GetService'Players'.LocalPlayer
 local charPlayer = pService.Character
-repeat task.wait() until pService.PlayerGui.LoadingScreen or pService.PlayerGui.LoadingScreen1 and charPlayer
+repeat task.wait() until (pService.PlayerGui:FindFirstChild'LoadingScreen' or pService.PlayerGui:FindFirstChild'LoadingScreen1') and charPlayer
 
 local function hitSkip()
     pcall(function()		
@@ -15,6 +15,11 @@ local function hitPlay()
         firesignal(loadingScreen.Play.MouseButton1Click)
     end)
 end
+
+pcall(function()
+    hitSkip()
+    hitPlay()
+end)
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/ActualServerHop.lua', true))()
 task.wait()
