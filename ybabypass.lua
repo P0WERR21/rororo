@@ -1,6 +1,6 @@
 local pService = game:GetService'Players'.LocalPlayer
 local charPlayer = pService.Character
-repeat task.wait() until (pService.PlayerGui:FindFirstChild('Skip', true))
+repeat task.wait() until (pService.PlayerGui:WaitForChild('Skip', true))
 
 local function hitSkip()
     pcall(function()		
@@ -11,7 +11,7 @@ end
 
 hitSkip()
 
-repeat task.wait() until pService.PlayerGui:FindFirstChild('Play', true)
+repeat task.wait() until pService.PlayerGui:WaitForChild('Play', true)
 
 local function hitPlay()
     pcall(function()
