@@ -60,3 +60,4 @@ local namecall; namecall = hookmetamethod(game, "__namecall", function(...)
     end
     return namecall(...)
 end)
+--
