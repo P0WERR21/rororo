@@ -26,7 +26,7 @@ local function getPlayerInstance()
     local closestPlayer = nil;
     local closestDistance = math.huge;
         for _, Player in next, playerService:GetPlayers() do
-            if (Player ~= nil and Player ~= playerCurrent) and Player.Character then
+            if (Player ~= nil and Player ~= playerCurrent) and Player.Character and tostring(Player.Parent) ~= 'CharacterGraveyard' then
                 local playerChar = Player.Character or nil
                 local playerHum = playerChar:FindFirstChild'Humanoid' or nil
                 local playerPart = playerChar.PrimaryPart or playerChar.HumanoidRootPart or nil
