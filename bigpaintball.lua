@@ -27,9 +27,9 @@ local function getPlayerInstance()
     local closestDistance = math.huge;
         for _, Player in next, playerService:GetPlayers() do
             if (Player ~= nil and Player ~= playerCurrent) and Player.Character and tostring(Player.Parent) ~= 'CharacterGraveyard' then
-                local playerChar = Player.Character or nil
-                local playerHum = playerChar:FindFirstChild'Humanoid' or nil
-                local playerPart = playerChar.PrimaryPart or playerChar.HumanoidRootPart or nil
+                local playerChar = Player.Character
+                local playerHum = playerChar:FindFirstChild'Humanoid'
+                local playerPart = playerChar.PrimaryPart or playerChar.HumanoidRootPart
                 if (playerHum and playerPart and playerChar.Humanoid.Health ~= 0) and teamCheck(Player) then
                     local ScreenPos = getScreenPos(playerPart.Position)
                     local mouseDist = (Vector2.new(Mouse.X, Mouse.Y) - ScreenPos).Magnitude
