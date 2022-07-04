@@ -1,4 +1,4 @@
-game.Loaded:Wait()
+local loading = game.Loaded:Wait()
 
 -- Big Paintball Silent Aim
 local playerService = game:GetService'Players'
