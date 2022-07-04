@@ -1,4 +1,4 @@
-local loading = game.Loaded:Wait()
+repeat task.wait() until game:IsLoaded()
 
 -- Big Paintball Silent Aim
 local playerService = game:GetService'Players'
