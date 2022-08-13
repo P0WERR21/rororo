@@ -8,6 +8,8 @@
     loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-Item.lua', true))()
 ]]--
 
+-- Made By Meraki
+
 -- Defining Local-Player Variables
 local playerService = game:GetService'Players'
 local playerClient = playerService.LocalPlayer
