@@ -64,7 +64,7 @@ end
 
 renderDebris() -- Calls the function
 
-repeat task.wait() until #workspace.ItemSpawns.Meteors >= 1 -- Waits until game renders the desert area
+repeat task.wait() until #workspace.ItemSpawns.Meteors:GetChildren() >= 1 -- Waits until game renders the desert area
 
 shared.Debounce = true -- Globally Defines a Debounce Var
 
