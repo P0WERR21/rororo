@@ -1,6 +1,7 @@
 --[[ Example Usage:
     -- Defining Shared Variables (Global)
     shared.Toggled = true
+    shared.AutoStore = true
     shared.tableToPickup = {
         "Meteor",
         "SandDebris"
@@ -12,6 +13,8 @@
 
 -- Defining Local-Player Variables
 local playerService = game:GetService'Players'
+local replService = game:GetService'ReplicatedStorage'
+
 local playerClient = playerService.LocalPlayer
 
 local playerChar = playerClient.Character
@@ -98,7 +101,19 @@ local function startSearch()
 end
 
 
-while shared.Toggled do -- Loop firing startSearch()
-    startSearch()
-    task.wait()
-end
+task.spawn(function()
+    while shared.Toggled do -- Loop firing startSearch()
+        startSearch()
+        task.wait()
+    end
+end)
+
+task.spawn(function()
+        playerClient.Backpack.ChildAdded:Connect(function(Child)
+           if shared.AutoStore then
+              Child.Parent = game.Players.LocalPlayer.Character
+              replService.Remotes.InventoryRemote:FireServer("ItemInventory", {["AddItems"] = true})
+           end)
+        task.wait()
+    end
+end)
