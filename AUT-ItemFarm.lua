@@ -5,7 +5,7 @@
         "Meteor",
         "SandDebris",
     }
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-Item.lua', true))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-ItemFarm.lua', true))()
 ]]--
 
 -- Made By Meraki
