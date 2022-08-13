@@ -1,18 +1,32 @@
+--[[ Example Usage:
+    -- Defining Shared Variables (Global)
+    shared.Toggled = true
+    shared.tableToPickup = {
+        "Meteor",
+        "SandDebris",
+    }
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-Item', true))()
+]]--
+
+-- Defining Local-Player Variables
 local playerService = game:GetService'Players'
 local playerClient = playerService.LocalPlayer
 
 local playerChar = playerClient.Character
 
-local function makeMoveable(_)
+-- Turns off CanCollide for Named Instance
+local function CanCollideToggle(_)
     if (_.Name == 'Meteor' or _.Name == 'SandDebris') and _.CanCollide == true then
         _.CanCollide = false
     end
 end
 
+-- Rewrites the variable for your player's character on death
 playerClient.CharacterAdded:Connect(function()
     playerChar = playerClient.Character
 end)
 
+-- Disables World Collision (for underground purposes)
 local function disableCollision()
     for _, Collision in pairs(workspace.Map.Layout.Collisions:GetChildren()) do
         if (Collision:IsA'BasePart' and Collision.CanCollide == true) then
@@ -21,15 +35,17 @@ local function disableCollision()
     end
 end
 
+-- Renders The Sand/Meteor
 local function renderDebris()
-    disableCollision()
+    disableCollision() -- Calls DisableCollision
     
     for _, Child in pairs(workspace.ItemSpawns:GetDescendants()) do
-        makeMoveable(Child)
+        CanCollideToggle(Child) -- Disables Collision for Item(s)
     end
 
-    workspace.ItemSpawns.DescendantAdded:Connect(makeMoveable)
-    
+    workspace.ItemSpawns.DescendantAdded:Connect(CanCollideToggle) -- DescendantAdded Connected with CanCollideToggle
+
+    -- Creating a Platform for Assisted Item-Farm
     local newPart = Instance.new('Part', workspace)
     newPart.Name = game:GetService'HttpService':GenerateGUID(false)
     newPart.Anchored = true
@@ -40,30 +56,31 @@ local function renderDebris()
     newPart.Rotation = Vector3.new(0, 0, 0)
     
     local deathHold = newPart:Clone()
-    deathHold.Position = Vector3.new(-535, 800, 640) 
+    deathHold.Position = Vector3.new(-535, 800, 640) -- Another Cloned Platform at a lower Y Axis (incase first one glitches)
     task.wait()
 
-    playerChar:MoveTo(newPart.Position)
+    playerChar:MoveTo(newPart.Position) -- Teleports you to a hotspot for rendering
 end
 
-renderDebris()
-repeat task.wait() until workspace.ItemSpawns:FindFirstChild('Meteor', true)
+renderDebris() -- Calls the function
 
-shared.Debounce = true
+repeat task.wait() until #workspace.ItemSpawns.Meteors >= 1 -- Waits until game renders the desert area
+
+shared.Debounce = true -- Globally Defines a Debounce Var
 
 local function movePickup(_)
-    if shared.Debounce then
-        disableCollision()
+    if shared.Debounce then -- Classic Debounce Usage (So Loop Doesn't Break)
+        shared.Debounce = false -- Turns off Debounce for Timing
+        disableCollision() -- Disables all Collisions Again
         task.wait(.3)
-        shared.Debounce = false
         local realInstance = _.Parent.Parent;
         repeat 
             realInstance.CanCollide = false
-            playerChar:MoveTo(realInstance.Position + Vector3.new(0, -4, 0))
-            fireproximityprompt(_)
+            playerChar:MoveTo(realInstance.Position + Vector3.new(0, -4, 0)) -- Loop Teleports to Instance (Incase Instance is literally flying)
+            fireproximityprompt(_) -- FireProximityPrompt is Documented in https://x.synapse.to/ Docs
             task.wait()
-        until not realInstance or not realInstance.Parent
-        shared.Debounce = true
+        until not realInstance or not realInstance.Parent -- Checks if the instance or its parent becomes nil and stops the loop
+        shared.Debounce = true -- Turns on the Debounce for Timing
         task.wait(.1)
     end
 end
@@ -71,15 +88,15 @@ end
 
 local function startSearch()
     for _, Item in pairs(workspace.ItemSpawns:GetDescendants()) do
-        if (Item:FindFirstChild'ProximityAttachment' and table.find(tableToPickup, Item.Name)) then
+        if (Item:FindFirstChild'ProximityAttachment' and table.find(shared.tableToPickup, Item.Name)) then
             local interactionPrompt = Item:FindFirstChild'ProximityAttachment'.Interaction
-            movePickup(interactionPrompt)
+            movePickup(interactionPrompt) -- (Fires the ProximityPrompt(s) while Teleporting to Instance)
         end     
     end
 end
 
 
-while true do
+while shared.Toggled do -- Loop firing startSearch()
     startSearch()
     task.wait()
 end
