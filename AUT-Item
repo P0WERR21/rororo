@@ -3,12 +3,6 @@ local playerClient = playerService.LocalPlayer
 
 local playerChar = playerClient.Character
 
-local tableToPickup = {
-    "Meteor",
-    "SandDebris",
-}
-
-
 local function makeMoveable(_)
     if (_.Name == 'Meteor' or _.Name == 'SandDebris') and _.CanCollide == true then
         _.CanCollide = false
@@ -85,7 +79,7 @@ local function startSearch()
 end
 
 
-while shared.Toggled do
+while true do
     startSearch()
     task.wait()
 end
