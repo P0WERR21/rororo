@@ -94,7 +94,7 @@ end
 local function startSearch()
     for _, Item in pairs(workspace.ItemSpawns:GetDescendants()) do
         if (Item:FindFirstChild'ProximityAttachment' and table.find(shared.tableToPickup, Item.Name) and Item:FindFirstChild('Interaction', true)) then
-            local interactionPrompt = Item:FindFirstChild'ProximityAttachment'.Interaction
+            local interactionPrompt = Item:FindFirstChild('Interaction', true)
             movePickup(interactionPrompt) -- (Fires the ProximityPrompt(s) while Teleporting to Instance)
         end     
     end
@@ -102,8 +102,11 @@ end
 
 local function storeItems()
      for _, Tool in pairs(playerClient.Backpack:GetChildren()) do
-        Tool.Parent = playerChar
-        replService.Remotes.InventoryRemote:FireServer("ItemInventory", {["AddItems"] = true})
+        if Tool then
+            Tool.Parent = playerChar
+            replService.Remotes.InventoryRemote:FireServer("ItemInventory", {["AddItems"] = true})
+            print('Stored ', Tool.Name)
+        end
      end
 end
 
