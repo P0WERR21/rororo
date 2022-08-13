@@ -100,6 +100,12 @@ local function startSearch()
     end
 end
 
+local function storeItems()
+     for _, Tool in pairs(playerClient.Backpack:GetChildren()) do
+        Tool.Parent = playerChar
+        replService.Remotes.InventoryRemote:FireServer("ItemInventory", {["AddItems"] = true})
+     end
+end
 
 task.spawn(function()
     while shared.Toggled do -- Loop firing startSearch()
@@ -109,11 +115,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-        playerClient.Backpack.ChildAdded:Connect(function(Child)
-           if shared.AutoStore then
-              Child.Parent = game.Players.LocalPlayer.Character
-              replService.Remotes.InventoryRemote:FireServer("ItemInventory", {["AddItems"] = true})
-           end)
-        task.wait()
+    while shared.AutoStore then
+        storeItems()
     end
 end)
