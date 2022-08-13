@@ -115,7 +115,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while shared.AutoStore then
+    while shared.AutoStore do
         storeItems()
         task.wait()
     end
