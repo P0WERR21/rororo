@@ -5,7 +5,7 @@
         "Meteor",
         "SandDebris",
     }
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-Item', true))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-Item.lua', true))()
 ]]--
 
 -- Defining Local-Player Variables
