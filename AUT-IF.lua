@@ -3,9 +3,9 @@
     shared.Toggled = true
     shared.tableToPickup = {
         "Meteor",
-        "SandDebris",
+        "SandDebris"
     }
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-ItemFarm.lua', true))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/3bo3c0ewnj9hks/rororo/main/AUT-IF.lua', true))()
 ]]--
 
 -- Made By Meraki
@@ -90,7 +90,7 @@ end
 
 local function startSearch()
     for _, Item in pairs(workspace.ItemSpawns:GetDescendants()) do
-        if (Item:FindFirstChild'ProximityAttachment' and table.find(tableToPickup, Item.Name)) then
+        if (Item:FindFirstChild'ProximityAttachment' and table.find(shared.tableToPickup, Item.Name)) then
             local interactionPrompt = Item:FindFirstChild'ProximityAttachment'.Interaction
             movePickup(interactionPrompt) -- (Fires the ProximityPrompt(s) while Teleporting to Instance)
         end     
