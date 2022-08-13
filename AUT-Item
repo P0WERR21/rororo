@@ -88,7 +88,7 @@ end
 
 local function startSearch()
     for _, Item in pairs(workspace.ItemSpawns:GetDescendants()) do
-        if (Item:FindFirstChild'ProximityAttachment' and table.find(shared.tableToPickup, Item.Name)) then
+        if (Item:FindFirstChild'ProximityAttachment' and table.find(tableToPickup, Item.Name)) then
             local interactionPrompt = Item:FindFirstChild'ProximityAttachment'.Interaction
             movePickup(interactionPrompt) -- (Fires the ProximityPrompt(s) while Teleporting to Instance)
         end     
